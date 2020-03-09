@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 2.8.12)
+project(eyes_close_detector)
+
+add_subdirectory(./dlib dlib_build)
+
+if (APPLE)
+   if (DLIB_NO_GUI_SUPPORT)
+      message("No GUI support, please install XQuartz.")
+   else()
+      find_package(OpenCV QUIET)
+      if (OpenCV_FOUND)
+         include_directories(${OpenCV_INCLUDE_DIRS})
+
+         add_executable(detector detector.cpp)
+         target_link_libraries(detector dlib::dlib ${OpenCV_LIBS})
+      else()
+         message("OpenCV not found. Please install OpenCV.")
+      endif()
+   endif()
+else()
+   if (DLIB_NO_GUI_SUPPORT)
+      message("No GUI support, please install suitable GUI support for your OS.")
+   else()
+      find_package(OpenCV QUIET)
+      if (OpenCV_FOUND)
+         include_directories(${OpenCV_INCLUDE_DIRS})
+
+         add_executable(detector detector.cpp)
+         target_link_libraries(detector dlib::dlib ${OpenCV_LIBS})
+      else()
+         message("OpenCV not found. Please install OpenCV.")
+      endif()
+   endif()
+endif()
+
+
