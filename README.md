@@ -1,7 +1,7 @@
 # Eyes-closing-detector
 
 ## Dependencies
-OpenCV
+OpenCV, dlib
 
 ## How to build the program
 mkdir build; cd build; cmake ..; cmake --build . 
